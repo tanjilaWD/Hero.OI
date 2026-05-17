@@ -6,6 +6,7 @@ import { createBrowserRouter } from 'react-router'
 import RootLayout from './layout/RootLayout'
 import Apps from './pages/apps/Apps'
 import InstallApps from './pages/installApps/InstallApps'
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 
 const router = createBrowserRouter(
   [
@@ -22,14 +23,14 @@ const router = createBrowserRouter(
           element:<InstallApps/>
         }
       ],
-      errorElement: <h2>This page is not found</h2>
+      errorElement: <NotFoundPage/>
     }
   ]
 )
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <h2 className='text-amber-600'>Hello</h2>
+      
     <RouterProvider router={router} />
   </StrictMode>,
 )
