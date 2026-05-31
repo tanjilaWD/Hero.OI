@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { FiDownload } from "react-icons/fi";
 import { IoMdStar } from "react-icons/io";
+import { Link } from "react-router";
 
 const TrendingApps = () => {
 
   const [apps, setApps] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,6 +15,7 @@ const TrendingApps = () => {
 
       console.log(data);
       setApps(data);
+      setLoading(false);
     };
 
     fetchData();
@@ -20,6 +23,7 @@ const TrendingApps = () => {
   }, []);
 
   console.log(apps, 'apps');
+  console.log(loading, 'Loading');
 
   return (
     <div className="container mx-auto my-14">
@@ -32,11 +36,11 @@ const TrendingApps = () => {
         </p>
       </div>
 
-      <h2>Total apps: {apps.length}</h2>
+    
 
       <div className="grid grid-cols-3 gap-5">
         {
-          apps.map((app) => {
+          apps.slice(0,9).map((app) => {
             return (
               <div key={app.id} className="card bg-base-100 w-96 shadow-sm">
 
@@ -44,6 +48,7 @@ const TrendingApps = () => {
                   <img
                     src={app.image}
                     alt={app.title}
+                    className="h-[200px] w-[200px]"
                   />
                 </figure>
 
@@ -74,6 +79,13 @@ const TrendingApps = () => {
           })
         }
       </div>
+      <div className="text-center mt-4">
+        <Link to={"/apps"}>
+       <button className="btn bg-purple-500 text-white">View All</button>
+      </Link>
+      </div>
+      
+     
 
     </div>
 
